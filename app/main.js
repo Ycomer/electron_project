@@ -60,7 +60,6 @@ const createWindow = (exports.createWindow = () => {
           cancelId: 1,
         })
         .then((result) => {
-          console.log(result, "which");
           if (result.response === 0) {
             newWindow.destroy();
           }
@@ -99,7 +98,6 @@ const openFile = (exports.openFile = (targetWindow, file) => {
   const content = fs.readFileSync(file).toString();
   app.addRecentDocument(file);
   targetWindow.setRepresentedFilename(file);
-  console.log(file, content, "又没有值2");
   targetWindow.webContents.send("file-opened", file, content);
   startWatchingFile(targetWindow, file);
   createApplicationMenu();
@@ -118,7 +116,6 @@ exports.saveHtml = (targetWindow, contnet) => {
       ],
     })
     .then((file) => {
-      console.log(file, "sfffff");
       if (!file) return;
       fs.writeFileSync(file, contnet);
     })
@@ -126,10 +123,8 @@ exports.saveHtml = (targetWindow, contnet) => {
 };
 
 exports.saveMarkdown = (targetWindow, file, content) => {
-  console.log(file, "filefilefile");
   // 当文件不存在的时候，先新建一个并保存
   if (!file) {
-    console.log(file, "wwowo");
     dialog
       .showSaveDialog(targetWindow, {
         title: "Save Markdown",
@@ -143,7 +138,6 @@ exports.saveMarkdown = (targetWindow, file, content) => {
       })
       .then((res) => {
         const file = res.filePath;
-        console.log(file, content, "bucpzl");
         if (!file) return;
         fs.writeFileSync(file, content);
         openFile(targetWindow, file);
@@ -174,7 +168,5 @@ exports.getFileFromUser = (targetWindow) => {
         openFile(targetWindow, file[0]);
       }
     })
-    .catch((err) => {
-      console.log(err, "eroor occer");
-    });
+    .catch((err) => {});
 };

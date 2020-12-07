@@ -127,7 +127,6 @@ openInDefaultButton.addEventListener("click", openInDefaultApplication);
 
 // 渲染文件的逻辑领出来
 const renderFile = (file, contnet) => {
-  console.log(file, contnet, "又没有值1");
   filePath = file;
   originalContent = contnet;
 
@@ -145,7 +144,6 @@ ipcRenderer.on("show-file", showFile);
 ipcRenderer.on("open-in-default", openInDefaultApplication);
 
 ipcRenderer.on("file-opened", (event, file, content) => {
-  console.log(file, content, "又没有值3");
   if (currenWindow.isDocumentEdited() && isDifferentContent(content)) {
     remote.dialog
       .showMessageBox(newWindow, {
